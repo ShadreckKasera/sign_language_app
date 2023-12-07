@@ -48,15 +48,13 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Sign Language App',
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.blue,
-                  fontWeight: FontWeight.bold,
-                ),
+              Image.asset(
+                'lib/assets/images/logo-removebg-preview.png',
+                height: 150,
               ),
-              const SizedBox(height: 40),
+              const SizedBox(
+                height: 40,
+              ),
               TextFormField(
                 controller: _emailController,
                 decoration: InputDecoration(
