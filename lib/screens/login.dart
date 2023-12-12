@@ -15,8 +15,8 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   bool _isPasswordVisible = false;
 
-  final String validEmail = '1';
-  final String validPassword = '2';
+  final String validEmail = 'mbonechegift@gmail.com';
+  final String validPassword = 'Victor1234';
 
   void _showErrorDialog(String errorMessage) {
     showDialog(
@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(10.0),
         child: Form(
           key: _formKey,
           child: Column(
@@ -50,10 +50,10 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               Image.asset(
                 'lib/assets/images/logo-removebg-preview.png',
-                height: 150,
+                height: 120,
               ),
               const SizedBox(
-                height: 40,
+                height: 20,
               ),
               TextFormField(
                 controller: _emailController,

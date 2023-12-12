@@ -1,23 +1,82 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:sign_language_app/screens/login.dart';
+import 'package:tflite/tflite.dart';
+import 'home.dart';
 
-void main() {
-  runApp(const MyApp());
+List<CameraDescription>? cameras;
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Sign language app',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.indigo[900],
       ),
-      home: const LoginPage(),
+      home: FirstScreen(),
+    );
+  }
+}
+
+class FirstScreen extends StatefulWidget {
+  @override
+  _FirstScreenState createState() => _FirstScreenState();
+}
+
+class _FirstScreenState extends State<FirstScreen> {
+  loadmodel() async {
+    Tflite.loadModel(
+      model: "assets/model_unquant.tflite",
+      labels: "assets/labels.txt",
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    loadmodel();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var h = MediaQuery.of(context).size.height;
+    var w = MediaQuery.of(context).size.width;
+    return Scaffold(
+      backgroundColor: Colors.indigo[900],
+      body: Center(
+        child: Container(
+          color: Theme.of(context).primaryColor,
+          child: Container(
+            margin: const EdgeInsets.all(20),
+            height: 50,
+            width: w,
+            child: MaterialButton(
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LoginPage(),
+                  ),
+                );
+              },
+              child: const Text(
+                'Get Started..',
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
